@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>デモECサイト - 商品一覧</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">Demo Shop</a>
+            <ul class="nav-links">
+                <li><a href="index.html">ホーム</a></li>
+                <li><a href="index.html">商品</a></li>
+                <li>
+                    <button class="cart-icon" onclick="goToCart()" title="カートを見る">
+                        🛒
+                        <span class="cart-count">0</span>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h1 class="page-title">商品一覧</h1>
+        
+        <div class="products-grid">
+            <div class="product-card" data-product-id="laptop-001">
+                <div class="product-image" style="background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+                <div class="product-info">
+                    <h3 class="product-title">高性能ノートパソコン</h3>
+                    <p class="product-description">最新のプロセッサーを搭載した薄型軽量ノートパソコン。ビジネスからクリエイティブワークまで幅広く対応。</p>
+                    <div class="product-price">¥128,000</div>
+                    <button class="btn btn-primary" onclick="addToCart('laptop-001', '高性能ノートパソコン', 128000, 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)')">
+                        カートに追加
+                    </button>
+                    <a href="product.html?id=laptop-001" class="btn btn-secondary" style="margin-left: 10px;">詳細を見る</a>
+                </div>
+            </div>
+
+            <div class="product-card" data-product-id="smartphone-001">
+                <div class="product-image" style="background-image: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
+                <div class="product-info">
+                    <h3 class="product-title">スマートフォン Pro</h3>
+                    <p class="product-description">高解像度ディスプレイと先進的なカメラ機能を備えた最新スマートフォン。</p>
+                    <div class="product-price">¥89,800</div>
+                    <button class="btn btn-primary" onclick="addToCart('smartphone-001', 'スマートフォン Pro', 89800, 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)')">
+                        カートに追加
+                    </button>
+                    <a href="product.html?id=smartphone-001" class="btn btn-secondary" style="margin-left: 10px;">詳細を見る</a>
+                </div>
+            </div>
+
+            <div class="product-card" data-product-id="headphones-001">
+                <div class="product-image" style="background-image: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"></div>
+                <div class="product-info">
+                    <h3 class="product-title">ワイヤレスヘッドホン</h3>
+                    <p class="product-description">ノイズキャンセリング機能付きの高音質ワイヤレスヘッドホン。長時間の使用でも快適。</p>
+                    <div class="product-price">¥24,800</div>
+                    <button class="btn btn-primary" onclick="addToCart('headphones-001', 'ワイヤレスヘッドホン', 24800, 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)')">
+                        カートに追加
+                    </button>
+                    <a href="product.html?id=headphones-001" class="btn btn-secondary" style="margin-left: 10px;">詳細を見る</a>
+                </div>
+            </div>
+
+            <div class="product-card" data-product-id="watch-001">
+                <div class="product-image" style="background-image: linear-gradient(135deg, #fa709a 0%, #fee140 100%);"></div>
+                <div class="product-info">
+                    <h3 class="product-title">スマートウォッチ</h3>
+                    <p class="product-description">健康管理とスマート機能を兼ね備えたスタイリッシュなスマートウォッチ。</p>
+                    <div class="product-price">¥45,600</div>
+                    <button class="btn btn-primary" onclick="addToCart('watch-001', 'スマートウォッチ', 45600, 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)')">
+                        カートに追加
+                    </button>
+                    <a href="product.html?id=watch-001" class="btn btn-secondary" style="margin-left: 10px;">詳細を見る</a>
+                </div>
+            </div>
+
+            <div class="product-card" data-product-id="tablet-001">
+                <div class="product-image" style="background-image: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);"></div>
+                <div class="product-info">
+                    <h3 class="product-title">タブレット</h3>
+                    <p class="product-description">大画面で快適な操作性を実現したプレミアムタブレット。クリエイティブ作業に最適。</p>
+                    <div class="product-price">¥67,800</div>
+                    <button class="btn btn-primary" onclick="addToCart('tablet-001', 'タブレット', 67800, 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)')">
+                        カートに追加
+                    </button>
+                    <a href="product.html?id=tablet-001" class="btn btn-secondary" style="margin-left: 10px;">詳細を見る</a>
+                </div>
+            </div>
+
+            <div class="product-card" data-product-id="camera-001">
+                <div class="product-image" style="background-image: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);"></div>
+                <div class="product-info">
+                    <h3 class="product-title">デジタルカメラ</h3>
+                    <p class="product-description">プロ仕様の高画質撮影が可能なミラーレスデジタルカメラ。</p>
+                    <div class="product-price">¥156,000</div>
+                    <button class="btn btn-primary" onclick="addToCart('camera-001', 'デジタルカメラ', 156000, 'linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)')">
+                        カートに追加
+                    </button>
+                    <a href="product.html?id=camera-001" class="btn btn-secondary" style="margin-left: 10px;">詳細を見る</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Demo Shop. All rights reserved. - Selenium WebDriverテスト用サイト</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

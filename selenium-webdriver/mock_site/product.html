@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商品詳細 - デモECサイト</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">Demo Shop</a>
+            <ul class="nav-links">
+                <li><a href="index.html">ホーム</a></li>
+                <li><a href="index.html">商品</a></li>
+                <li>
+                    <button class="cart-icon" onclick="goToCart()" title="カートを見る">
+                        🛒
+                        <span class="cart-count">0</span>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div id="product-detail-container">
+            <!-- 商品詳細はJavaScriptで動的に生成 -->
+        </div>
+        
+        <div style="margin-top: 2rem;">
+            <a href="index.html" class="btn btn-secondary">商品一覧に戻る</a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Demo Shop. All rights reserved. - Selenium WebDriverテスト用サイト</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // 商品データ
+        const products = {
+            'laptop-001': {
+                id: 'laptop-001',
+                name: '高性能ノートパソコン',
+                price: 128000,
+                image: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                description: '最新のプロセッサーを搭載した薄型軽量ノートパソコン。ビジネスからクリエイティブワークまで幅広く対応します。',
+                features: [
+                    'Intel Core i7プロセッサー',
+                    '16GB RAM',
+                    '512GB SSD',
+                    '14インチ 4K液晶',
+                    'バッテリー駆動時間 最大12時間',
+                    '重量 1.2kg'
+                ]
+            },
+            'smartphone-001': {
+                id: 'smartphone-001',
+                name: 'スマートフォン Pro',
+                price: 89800,
+                image: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+                description: '高解像度ディスプレイと先進的なカメラ機能を備えた最新スマートフォン。',
+                features: [
+                    '6.7インチ有機ELディスプレイ',
+                    'トリプルカメラシステム',
+                    '256GB内蔵ストレージ',
+                    '5G対応',
+                    '防水・防塵機能',
+                    'ワイヤレス充電対応'
+                ]
+            },
+            'headphones-001': {
+                id: 'headphones-001',
+                name: 'ワイヤレスヘッドホン',
+                price: 24800,
+                image: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+                description: 'ノイズキャンセリング機能付きの高音質ワイヤレスヘッドホン。長時間の使用でも快適です。',
+                features: [
+                    'アクティブノイズキャンセリング',
+                    'Bluetooth 5.0',
+                    'バッテリー駆動時間 最大30時間',
+                    'クイックチャージ対応',
+                    '折りたたみ式デザイン',
+                    '専用ケース付属'
+                ]
+            },
+            'watch-001': {
+                id: 'watch-001',
+                name: 'スマートウォッチ',
+                price: 45600,
+                image: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+                description: '健康管理とスマート機能を兼ね備えたスタイリッシュなスマートウォッチ。',
+                features: [
+                    '1.4インチタッチスクリーン',
+                    'GPS内蔵',
+                    '心拍数モニタリング',
+                    '睡眠トラッキング',
+                    '防水機能（50m）',
+                    'バッテリー駆動時間 7日間'
+                ]
+            },
+            'tablet-001': {
+                id: 'tablet-001',
+                name: 'タブレット',
+                price: 67800,
+                image: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
+                description: '大画面で快適な操作性を実現したプレミアムタブレット。クリエイティブ作業に最適です。',
+                features: [
+                    '12.9インチ Liquid Retina ディスプレイ',
+                    'M2チップ',
+                    '128GB ストレージ',
+                    'Apple Pencil対応',
+                    'Magic Keyboard対応',
+                    '超広角フロントカメラ'
+                ]
+            },
+            'camera-001': {
+                id: 'camera-001',
+                name: 'デジタルカメラ',
+                price: 156000,
+                image: 'linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)',
+                description: 'プロ仕様の高画質撮影が可能なミラーレスデジタルカメラ。',
+                features: [
+                    '2400万画素フルフレームセンサー',
+                    '4K動画撮影対応',
+                    '5軸手ブレ補正',
+                    'デュアルカードスロット',
+                    '防塵・防滴構造',
+                    '高速オートフォーカス'
+                ]
+            }
+        };
+
+        // URLパラメータから商品IDを取得
+        function getProductIdFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('id');
+        }
+
+        // 商品詳細を表示
+        function displayProductDetail() {
+            const productId = getProductIdFromURL();
+            const product = products[productId];
+            
+            if (!product) {
+                document.getElementById('product-detail-container').innerHTML = `
+                    <div class="alert alert-error">
+                        商品が見つかりません。
+                    </div>
+                `;
+                return;
+            }
+            
+            document.title = `${product.name} - デモECサイト`;
+            
+            document.getElementById('product-detail-container').innerHTML = `
+                <div class="product-detail">
+                    <div class="product-detail-image" style="background-image: ${product.image};"></div>
+                    <div class="product-detail-info">
+                        <h1>${product.name}</h1>
+                        <div class="product-detail-price">¥${product.price.toLocaleString()}</div>
+                        <div class="product-detail-description">
+                            <p>${product.description}</p>
+                        </div>
+                        <div class="product-features">
+                            <h3>主な特徴</h3>
+                            <ul>
+                                ${product.features.map(feature => `<li>${feature}</li>`).join('')}
+                            </ul>
+                        </div>
+                        <div style="margin-top: 2rem;">
+                            <button class="btn btn-primary" style="font-size: 1.1rem; padding: 15px 30px;" onclick="addToCart('${product.id}', '${product.name}', ${product.price}, '${product.image}')">
+                                カートに追加
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // ページ読み込み時に商品詳細を表示
+        document.addEventListener('DOMContentLoaded', function() {
+            displayProductDetail();
+        });
+    </script>
+</body>
+</html>

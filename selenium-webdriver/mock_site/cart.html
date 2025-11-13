@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ショッピングカート - デモECサイト</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">Demo Shop</a>
+            <ul class="nav-links">
+                <li><a href="index.html">ホーム</a></li>
+                <li><a href="index.html">商品</a></li>
+                <li>
+                    <button class="cart-icon" onclick="goToCart()" title="カートを見る">
+                        🛒
+                        <span class="cart-count">0</span>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h1 class="page-title">ショッピングカート</h1>
+        
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; margin-top: 2rem;">
+            <div>
+                <div id="cart-items">
+                    <!-- カートアイテムはJavaScriptで動的に生成 -->
+                </div>
+                
+                <div style="margin-top: 2rem;">
+                    <a href="index.html" class="btn btn-secondary">買い物を続ける</a>
+                </div>
+            </div>
+            
+            <div>
+                <div class="order-summary">
+                    <!-- 注文サマリーはJavaScriptで動的に生成 -->
+                </div>
+                
+                <div style="margin-top: 1rem;">
+                    <a href="checkout.html" id="checkout-btn" class="btn btn-success" style="width: 100%; text-align: center;">
+                        レジに進む
+                    </a>
+                </div>
+                
+                <div style="margin-top: 1rem; font-size: 0.9rem; color: #666;">
+                    <p>📦 5,000円以上のご注文で送料無料</p>
+                    <p>🔒 SSL暗号化による安全な決済</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Demo Shop. All rights reserved. - Selenium WebDriverテスト用サイト</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // チェックアウトボタンの状態を更新
+        function updateCheckoutButton() {
+            const checkoutBtn = document.getElementById('checkout-btn');
+            if (cart.length === 0) {
+                checkoutBtn.style.opacity = '0.5';
+                checkoutBtn.style.pointerEvents = 'none';
+                checkoutBtn.textContent = 'カートが空です';
+            } else {
+                checkoutBtn.style.opacity = '1';
+                checkoutBtn.style.pointerEvents = 'auto';
+                checkoutBtn.textContent = 'レジに進む';
+            }
+        }
+
+        // カートアイテム表示関数を拡張
+        const originalDisplayCartItems = displayCartItems;
+        displayCartItems = function() {
+            originalDisplayCartItems();
+            updateCheckoutButton();
+        };
+
+        // ページ読み込み時にチェックアウトボタンの状態を更新
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCheckoutButton();
+        });
+    </script>
+</body>
+</html>

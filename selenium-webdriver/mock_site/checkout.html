@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ご注文手続き - デモECサイト</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">Demo Shop</a>
+            <ul class="nav-links">
+                <li><a href="index.html">ホーム</a></li>
+                <li><a href="index.html">商品</a></li>
+                <li>
+                    <button class="cart-icon" onclick="goToCart()" title="カートを見る">
+                        🛒
+                        <span class="cart-count">0</span>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h1 class="page-title">ご注文手続き</h1>
+        
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 3rem; margin-top: 2rem;">
+            <div>
+                <form id="checkout-form" style="background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+                    <h2 style="margin-bottom: 1.5rem; color: #333;">お客様情報</h2>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="name">お名前 *</label>
+                        <input type="text" id="name" name="name" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="email">メールアドレス *</label>
+                            <input type="email" id="email" name="email" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="phone">電話番号 *</label>
+                            <input type="tel" id="phone" name="phone" class="form-input" required>
+                        </div>
+                    </div>
+                    
+                    <h3 style="margin: 2rem 0 1rem 0; color: #333;">配送先住所</h3>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="postal">郵便番号 *</label>
+                            <input type="text" id="postal" name="postal" class="form-input" placeholder="123-4567" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="prefecture">都道府県 *</label>
+                            <select id="prefecture" name="prefecture" class="form-input" required>
+                                <option value="">選択してください</option>
+                                <option value="北海道">北海道</option>
+                                <option value="青森県">青森県</option>
+                                <option value="岩手県">岩手県</option>
+                                <option value="宮城県">宮城県</option>
+                                <option value="秋田県">秋田県</option>
+                                <option value="山形県">山形県</option>
+                                <option value="福島県">福島県</option>
+                                <option value="茨城県">茨城県</option>
+                                <option value="栃木県">栃木県</option>
+                                <option value="群馬県">群馬県</option>
+                                <option value="埼玉県">埼玉県</option>
+                                <option value="千葉県">千葉県</option>
+                                <option value="東京都">東京都</option>
+                                <option value="神奈川県">神奈川県</option>
+                                <option value="新潟県">新潟県</option>
+                                <option value="富山県">富山県</option>
+                                <option value="石川県">石川県</option>
+                                <option value="福井県">福井県</option>
+                                <option value="山梨県">山梨県</option>
+                                <option value="長野県">長野県</option>
+                                <option value="岐阜県">岐阜県</option>
+                                <option value="静岡県">静岡県</option>
+                                <option value="愛知県">愛知県</option>
+                                <option value="三重県">三重県</option>
+                                <option value="滋賀県">滋賀県</option>
+                                <option value="京都府">京都府</option>
+                                <option value="大阪府">大阪府</option>
+                                <option value="兵庫県">兵庫県</option>
+                                <option value="奈良県">奈良県</option>
+                                <option value="和歌山県">和歌山県</option>
+                                <option value="鳥取県">鳥取県</option>
+                                <option value="島根県">島根県</option>
+                                <option value="岡山県">岡山県</option>
+                                <option value="広島県">広島県</option>
+                                <option value="山口県">山口県</option>
+                                <option value="徳島県">徳島県</option>
+                                <option value="香川県">香川県</option>
+                                <option value="愛媛県">愛媛県</option>
+                                <option value="高知県">高知県</option>
+                                <option value="福岡県">福岡県</option>
+                                <option value="佐賀県">佐賀県</option>
+                                <option value="長崎県">長崎県</option>
+                                <option value="熊本県">熊本県</option>
+                                <option value="大分県">大分県</option>
+                                <option value="宮崎県">宮崎県</option>
+                                <option value="鹿児島県">鹿児島県</option>
+                                <option value="沖縄県">沖縄県</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="city">市区町村 *</label>
+                        <input type="text" id="city" name="city" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="address">番地・建物名 *</label>
+                        <input type="text" id="address" name="address" class="form-input" required>
+                    </div>
+                    
+                    <h3 style="margin: 2rem 0 1rem 0; color: #333;">お支払い方法</h3>
+                    
+                    <div class="form-group">
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                            <label style="display: flex; align-items: center; cursor: pointer;">
+                                <input type="radio" name="payment" value="credit" style="margin-right: 0.5rem;" checked>
+                                クレジットカード
+                            </label>
+                            <label style="display: flex; align-items: center; cursor: pointer;">
+                                <input type="radio" name="payment" value="bank" style="margin-right: 0.5rem;">
+                                銀行振込
+                            </label>
+                            <label style="display: flex; align-items: center; cursor: pointer;">
+                                <input type="radio" name="payment" value="cod" style="margin-right: 0.5rem;">
+                                代金引換
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div id="credit-card-form" style="margin-top: 1rem;">
+                        <div class="form-group">
+                            <label class="form-label" for="card-number">カード番号</label>
+                            <input type="text" id="card-number" name="card-number" class="form-input" placeholder="1234 5678 9012 3456" maxlength="19">
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="expiry">有効期限</label>
+                                <input type="text" id="expiry" name="expiry" class="form-input" placeholder="MM/YY" maxlength="5">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="cvv">セキュリティコード</label>
+                                <input type="text" id="cvv" name="cvv" class="form-input" placeholder="123" maxlength="4">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group" style="margin-top: 2rem;">
+                        <label style="display: flex; align-items: center; cursor: pointer;">
+                            <input type="checkbox" id="terms" name="terms" style="margin-right: 0.5rem;" required>
+                            <a href="#" style="color: #2c5aa0;">利用規約</a>と<a href="#" style="color: #2c5aa0;">プライバシーポリシー</a>に同意する
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-success" style="width: 100%; font-size: 1.1rem; padding: 15px; margin-top: 1.5rem;">
+                        注文を確定する
+                    </button>
+                </form>
+            </div>
+            
+            <div>
+                <div class="order-summary" id="checkout-summary">
+                    <!-- 注文サマリーはJavaScriptで動的に生成 -->
+                </div>
+                
+                <div style="margin-top: 1rem;">
+                    <a href="cart.html" class="btn btn-secondary" style="width: 100%; text-align: center;">
+                        カートに戻る
+                    </a>
+                </div>
+                
+                <div style="margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-radius: 6px; font-size: 0.9rem; color: #666;">
+                    <h4 style="color: #333; margin-bottom: 0.5rem;">配送について</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li>• 通常配送：2-3営業日</li>
+                        <li>• お急ぎ便：翌日配送</li>
+                        <li>• 5,000円以上で送料無料</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Demo Shop. All rights reserved. - Selenium WebDriverテスト用サイト</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // お支払い方法の表示/非表示を制御
+        function togglePaymentForm() {
+            const paymentRadios = document.querySelectorAll('input[name="payment"]');
+            const creditCardForm = document.getElementById('credit-card-form');
+            
+            paymentRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    if (this.value === 'credit') {
+                        creditCardForm.style.display = 'block';
+                    } else {
+                        creditCardForm.style.display = 'none';
+                    }
+                });
+            });
+        }
+
+        // カード番号フォーマット
+        function formatCardNumber() {
+            const cardNumberInput = document.getElementById('card-number');
+            if (cardNumberInput) {
+                cardNumberInput.addEventListener('input', function(e) {
+                    let value = e.target.value.replace(/\s/g, '').replace(/[^0-9]/gi, '');
+                    let formattedValue = value.match(/.{1,4}/g)?.join(' ') || '';
+                    
+                    if (formattedValue.length > 19) {
+                        formattedValue = formattedValue.substr(0, 19);
+                    }
+                    
+                    e.target.value = formattedValue;
+                });
+            }
+        }
+
+        // 有効期限フォーマット
+        function formatExpiry() {
+            const expiryInput = document.getElementById('expiry');
+            if (expiryInput) {
+                expiryInput.addEventListener('input', function(e) {
+                    let value = e.target.value.replace(/\D/g, '');
+                    if (value.length >= 2) {
+                        value = value.substring(0, 2) + '/' + value.substring(2, 4);
+                    }
+                    e.target.value = value;
+                });
+            }
+        }
+
+        // ページ読み込み時の初期化
+        document.addEventListener('DOMContentLoaded', function() {
+            // カートが空の場合はカートページにリダイレクト
+            if (cart.length === 0) {
+                window.location.href = 'cart.html';
+                return;
+            }
+            
+            togglePaymentForm();
+            formatCardNumber();
+            formatExpiry();
+        });
+    </script>
+</body>
+</html>
